@@ -1,0 +1,39 @@
+:host {
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #000000;
+}
+
+.product {
+  &__title {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  &__category {
+    color: #6d6d6d;
+    font-style: italic;
+  }
+  &__description {
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 18px;
+  }
+  &__price {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+
+  &__buy {
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 18px;
+    background-color: #49ecc4;
+
+    &[disabled] {
+      background-color: #afafaf;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+<div class="product__title">{{ product.name }}</div>
+<div class="product__category">{{ product.category }}</div>
+<div class="product__description">{{ product.description }}</div>
+<div class="product__price">{{ product.price }}$</div>
+<button
+  class="product__buy"
+  (click)="onClick()"
+  [disabled]="!product.isAvailable"
+>
+  Buy
+</button>
