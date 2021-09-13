@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2017-06-20
+## [1.0.0] - 2021-09-13
 ### Added
 - Catalog section for displaying products list
 - Cart section for displaying purchased items
