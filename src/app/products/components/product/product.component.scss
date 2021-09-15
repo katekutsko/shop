@@ -26,14 +26,25 @@
     font-size: 18px;
   }
 
-  &__buy {
+  @mixin purchaseAreaButton {
     margin-top: 10px;
     padding: 5px 10px;
     font-size: 18px;
+  }
+
+  &__buy {
+    @include purchaseAreaButton;
     background-color: #49ecc4;
 
     &[disabled] {
       background-color: #afafaf;
     }
+  }
+
+  &__in-cart {
+    display: inline-block;
+
+    @include purchaseAreaButton;
+    background-color: #faad1d;
   }
 }

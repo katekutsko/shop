@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ProductModel } from '../../models';
 import { ProductsService } from '../../services/products.service';
 
@@ -8,11 +9,15 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  products: ProductModel[];
+  products$: Observable<ProductModel[]>;
 
   constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.products = this.productsService.getProducts();
+    this.products$ = this.productsService.getProducts();
+  }
+
+  onAddToCart($event: ProductModel): void {
+    this.productsService.addItemToCart($event);
   }
 }

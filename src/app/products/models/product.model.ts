@@ -6,4 +6,5 @@ export interface ProductModel {
   price: number;
   category: Category;
   isAvailable: boolean;
+  isInCart?: boolean;
 }
