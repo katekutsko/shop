@@ -1,5 +1,8 @@
-<app-product
-  *ngFor="let product of (products$ | async)"
-  [product]="product"
-  (addToCart)="onAddToCart($event)"
-></app-product>
+Search: <input type="text" (keyup)="searchString$.next($event.target.value)" #search />
+<div class="product-list__items" [ngClass]="{'filtered': search.value.length > 0}">
+  <app-product
+    *ngFor="let product of products$ | async"
+    [product]="product"
+    (addToCart)="onAddToCart($event)"
+  ></app-product>
+</div>

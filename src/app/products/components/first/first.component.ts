@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Category } from '../../enums/category';
 
 @Component({
   selector: 'app-first',

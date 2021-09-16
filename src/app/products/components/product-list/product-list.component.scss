@@ -1,9 +1,16 @@
-:host {
+.product-list {
+  &__items {
     margin-top: 20px;
+    padding-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    
+
     & app-product {
-        margin: 0 10px 20px;
+      margin: 0 10px 20px;
     }
+
+    &.filtered {
+      border: 1px solid #ff0000;
+    }
+  }
 }
