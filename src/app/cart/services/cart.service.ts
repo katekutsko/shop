@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { CartItemModel } from '../models/cart-item.model';
 
 @Injectable({
@@ -15,6 +16,34 @@ export class CartService {
 
   getPurchasedItems(): Observable<CartItemModel[]> {
     return this.purchasedItemsSubject.asObservable();
+  }
+
+  getTotalItemsAmount(): Observable<number> {
+    return this.purchasedItemsSubject
+      .asObservable()
+      .pipe(
+        map((items: CartItemModel[]) =>
+          items.reduce(
+            (accumulator: number, item: CartItemModel) =>
+              accumulator + item.quantity,
+            0
+          )
+        )
+      );
+  }
+
+  getTotalCost(): Observable<number> {
+    return this.purchasedItemsSubject
+      .asObservable()
+      .pipe(
+        map((items: CartItemModel[]) =>
+          items.reduce(
+            (accumulator: number, item: CartItemModel) =>
+              accumulator + item.price * item.quantity,
+            0
+          )
+        )
+      );
   }
 
   addItemToCart(item: CartItemModel): void {

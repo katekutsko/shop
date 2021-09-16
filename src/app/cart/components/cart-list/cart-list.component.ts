@@ -11,11 +11,15 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartListComponent implements OnInit {
   products$: Observable<CartItemModel[]>;
+  totalItemsAmount$: Observable<number>;
+  totalCost$: Observable<number>;
 
   constructor(private readonly cartService: CartService) {}
 
   ngOnInit(): void {
     this.products$ = this.cartService.getPurchasedItems();
+    this.totalItemsAmount$ = this.cartService.getTotalItemsAmount();
+    this.totalCost$ = this.cartService.getTotalCost();
   }
 
   trackByName(index: number, item: CartItemModel): string {

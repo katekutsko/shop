@@ -10,6 +10,11 @@
       (removeAll)="onRemoveAll($event)"
     ></app-cart-item>
   </div>
+  <hr />
+  <div class="cart__total-items">
+    Total items: {{ totalItemsAmount$ | async }}
+  </div>
+  <div class="cart__total-cost">Total cost: {{ totalCost$ | async }}</div>
   <button (click)="onClear()">Clear</button>
 </div>
 <ng-template #emptyCart>
