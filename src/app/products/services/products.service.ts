@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CartItemModel } from 'src/app/cart/models/cart-item.model';
+import { CartItemModel } from '../../cart/models/cart-item.model';
 import { CartService } from '../../cart/services/cart.service';
 import { Category } from '../enums/category';
-import { mapProductToCartItem } from '../mappers';
-import { ProductModel } from '../models';
+import { mapProductToCartItem } from '../mappers/map-product-to-cart-item';
+import { ProductModel } from '../models/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private products$: Observable<ProductModel[]> = of([
+  products$: Observable<ProductModel[]> = of([
     {
       name: 'Trench coat',
       description: 'Nullam ut enim et tellus tempus hendrerit.',

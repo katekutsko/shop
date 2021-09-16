@@ -1,2 +1,6 @@
-<div class="cart-item__name">{{name}}</div>
-<div class="cart-item__price">{{price}}$</div>
+<div class="cart-item__name">{{ name }}</div>
+<div class="cart-item__price">{{ price }}$</div>
+<div class="cart-item__quantity">X {{ quantity }}</div>
+<button (click)="onAddOneClick()">+</button>
+<button (click)="onRemoveOneClick()">-</button>
+<button (click)="onRemoveAllClick()">X</button>
