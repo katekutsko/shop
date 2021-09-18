@@ -10,3 +10,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Catalog section for displaying products list
 - Cart section for displaying purchased items
+- Ability to add items to and remove from cart as well as manipulate their quantity
+- Total cost and quantity shown in cart
+- Search by item name or description
