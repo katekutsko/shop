@@ -2,8 +2,9 @@
 <div class="product__category">{{ product.category }}</div>
 <div class="product__description">{{ product.description }}</div>
 <div class="product__price">{{ product.price }}$</div>
-<ng-container *ngIf="!product.isInCart; else inCart">
+<ng-container>
   <button
+    *ngIf="!product.isInCart; else inCart"
     class="product__buy"
     (click)="onClick()"
     [disabled]="!product.isAvailable"

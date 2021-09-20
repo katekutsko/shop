@@ -1,4 +1,4 @@
-Search: <input type="text" (keyup)="searchString$.next($event.target.value)" #search />
+Search: <input type="text" (keyup)="searchString$.next(search.value)" #search />
 <div class="product-list__items" [ngClass]="{'filtered': search.value.length > 0}">
   <app-product
     *ngFor="let product of products$ | async"
