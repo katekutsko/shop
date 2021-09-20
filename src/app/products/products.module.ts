@@ -7,6 +7,6 @@ import { ProductListComponent } from './components/product-list/product-list.com
 @NgModule({
   declarations: [FirstComponent, ProductComponent, ProductListComponent],
   imports: [CommonModule],
-  exports: [FirstComponent],
+  exports: [FirstComponent], // Можно уже не использовать этот компонент
 })
 export class ProductsModule {}
