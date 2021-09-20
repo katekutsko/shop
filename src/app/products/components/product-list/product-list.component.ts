@@ -18,13 +18,15 @@ export class ProductListComponent implements OnInit {
   constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit(): void {
+    // вижу, вы полюбили использовать combineLatest,
+    // почему не withLatestFrom?
     this.products$ = combineLatest([
       this.productsService.getProducts(),
       this.searchString$.pipe(debounceTime(500)),
     ]).pipe(
       map(([products, searchString]: [ProductModel[], string]) =>
         products.filter((product: ProductModel) =>
-          Boolean(searchString)
+          Boolean(searchString) // можно попобовать вместо Boolean использовать !!
             ? product.name.toLowerCase().includes(searchString.toLowerCase()) ||
               product.description
                 .toLowerCase()

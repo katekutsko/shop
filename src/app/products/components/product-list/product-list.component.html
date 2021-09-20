@@ -1,3 +1,5 @@
+<!-- Если у вас уже есть шаблонная переменная #search,
+то вместо $event.target.value можно задействовать #search.value -->
 Search: <input type="text" (keyup)="searchString$.next($event.target.value)" #search />
 <div class="product-list__items" [ngClass]="{'filtered': search.value.length > 0}">
   <app-product
