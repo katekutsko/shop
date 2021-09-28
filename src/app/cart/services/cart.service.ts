@@ -94,6 +94,10 @@ export class CartService {
     this.updateCart();
   }
 
+  isEmptyCart(): boolean {
+    return this.purchasedItems.length === 0;
+  }
+
   private findItemIndexByName(itemName: string): number {
     return this.purchasedItems.findIndex(
       (itemInCart: CartItemModel) => itemInCart.name === itemName
