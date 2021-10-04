@@ -19,7 +19,7 @@ export class CartService {
   }
 
   getTotalItemsAmount(): Observable<number> {
-    return this.purchasedItemsSubject
+    return this.purchasedItemsSubject   // this.getPurchasedItems() ?
       .asObservable()
       .pipe(
         map((items: CartItemModel[]) =>
