@@ -33,8 +33,7 @@ export class CartService {
   }
 
   getTotalCost(): Observable<number> {
-    return this.purchasedItemsSubject
-      .asObservable()
+    return this.getPurchasedItems()
       .pipe(
         map((items: CartItemModel[]) =>
           items.reduce(

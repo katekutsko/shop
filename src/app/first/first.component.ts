@@ -18,7 +18,7 @@ export class FirstComponent implements OnInit {
   constructor(
     @Optional() @Inject(ConstantService) public constants: GlobalConstants,
     @Optional() @Inject(generatedString) public randomString: string,
-    @Optional() @Inject(idGenerator) public generator: Observable<number>,
+    @Optional() @Inject(idGenerator) public generator: () => Observable<number>,
     @Optional() @Inject(LocalStorage) public localStorageAPI: Storage
   ) {}
 
@@ -27,7 +27,7 @@ export class FirstComponent implements OnInit {
 
     console.log(this.randomString);
 
-    this.generator.pipe(takeUntil(timer(10000))).subscribe(console.log);
+    this.generator().pipe(takeUntil(timer(10000))).subscribe(console.log);
 
     this.localStorageAPI.setItem('a', 'b');
     console.log(this.localStorageAPI.getItem('a'));
