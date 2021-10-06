@@ -1,6 +1,24 @@
 <div class="cart__title">Cart</div>
 <div *ngIf="(products$ | async).length > 0; else emptyCart">
-  <div *ngFor="let product of products$ | async; trackBy: trackByName">
+  <label for="sort"> Sort By: </label>
+  <select id="sort" name="sort" (change)="onSortFieldToggled($event)">
+    <option value="" disabled selected>Select option</option>
+    <option value="price">Price</option>
+    <option value="name">Name</option>
+    <option value="quantity">Quantity</option>
+  </select>
+  <div>
+    Ascending
+    <input type="checkbox" [(ngModel)]="sortOptions.isAsc" />
+  </div>
+  <div
+    *ngFor="
+      let product of products$
+        | async
+        | orderBy: [sortOptions.sortField]:sortOptions.isAsc;
+      trackBy: trackByName
+    "
+  >
     <app-cart-item
       [name]="product.name"
       [price]="product.price"

@@ -13,3 +13,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Ability to add items to and remove from cart as well as manipulate their quantity
 - Total cost and quantity shown in cart
 - Search by item name or description
+- Sort cart items by name, quantity or price (for this OrderBy pipe was used)
+- Formatting of cart items price was changed to decimal with symbol (Currency pipe was used)

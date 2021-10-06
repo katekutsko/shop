@@ -1,5 +1,7 @@
-<div class="cart-item__name">{{ name }}</div>
-<div class="cart-item__price">{{ price }}$</div>
+<div class="cart-item__name">{{ name | uppercase }}</div>
+<div class="cart-item__price">
+  {{ price | currency: "USD":"symbol":"1.2-2" }}
+</div>
 <div class="cart-item__quantity">X {{ quantity }}</div>
 <button (click)="onAddOneClick()">+</button>
 <button (click)="onRemoveOneClick()">-</button>

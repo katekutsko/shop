@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { SortOptions } from 'src/app/shared';
 import { CartItemModel } from '../../models/cart-item.model';
 import { CartService } from '../../services/cart.service';
 
@@ -13,6 +14,11 @@ export class CartListComponent implements OnInit {
   products$: Observable<CartItemModel[]>;
   totalItemsAmount$: Observable<number>;
   totalCost$: Observable<number>;
+
+  sortOptions: SortOptions = {
+    sortField: null,
+    isAsc: false,
+  };
 
   constructor(private readonly cartService: CartService) {}
 
@@ -40,5 +46,14 @@ export class CartListComponent implements OnInit {
 
   onRemoveAll($event: string): void {
     this.cartService.removeItemFromCart($event);
+  }
+
+  onSortFieldToggled(event: any): void {
+    const sortField: string = event.target.value;
+    this.sortOptions = {
+      ...this.sortOptions,
+      sortField,
+    };
+    console.log(sortField);
   }
 }

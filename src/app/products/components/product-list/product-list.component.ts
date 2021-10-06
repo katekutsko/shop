@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { debounceTime, map, withLatestFrom } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
@@ -18,9 +18,11 @@ export class ProductListComponent implements OnInit {
   constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.products$ = this.searchString$.pipe(
+    this.products$ = combineLatest([
+      this.searchString$,
+      this.productsService.getProducts(),
+    ]).pipe(
       debounceTime(500),
-      withLatestFrom(this.productsService.getProducts()),
       map(([searchString, products]: [string, ProductModel[]]) =>
         products.filter((product: ProductModel) =>
           !!searchString

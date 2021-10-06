@@ -15,7 +15,21 @@ export class ProductsService {
     {
       name: 'Trench coat',
       description: 'Nullam ut enim et tellus tempus hendrerit.',
-      price: 180,
+      price: 260,
+      category: Category.CLOTHES,
+      isAvailable: true,
+    },
+    {
+      name: 'Fur coat',
+      description: 'Nullam ut enim et tellus tempus hendrerit.',
+      price: 200,
+      category: Category.CLOTHES,
+      isAvailable: true,
+    },
+    {
+      name: 'Leather coat',
+      description: 'Nullam ut enim et tellus tempus hendrerit.',
+      price: 300,
       category: Category.CLOTHES,
       isAvailable: true,
     },
@@ -30,7 +44,7 @@ export class ProductsService {
     {
       name: 'Leather boots',
       description: 'Duis pharetra imperdiet eros quis aliquam.',
-      price: 180,
+      price: 70,
       category: Category.SHOES,
       isAvailable: true,
     },
@@ -38,7 +52,7 @@ export class ProductsService {
       name: 'Silk scarf',
       description:
         'Nulla mattis orci, augue quam maximus nibh, vitae sagittis odio ante at neque.',
-      price: 120,
+      price: 70,
       category: Category.ACCESSORIES,
       isAvailable: true,
     },
