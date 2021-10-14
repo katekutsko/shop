@@ -17,10 +17,21 @@ import {
 } from './core';
 import { FirstComponent } from './first/first.component';
 import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+import { AdminModule } from './admin/admin.module';
+import { NoAccessPageComponent } from './core/components/no-access-page/no-access-page.component';
+import { NotFoundPageComponent } from './core/components/not-found-page/not-found-page.component';
 
 @NgModule({
-  declarations: [AppComponent, FirstComponent],
-  imports: [BrowserModule, CartModule, ProductsModule, SharedModule],
+  declarations: [AppComponent, FirstComponent, NoAccessPageComponent, NotFoundPageComponent],
+  imports: [
+    BrowserModule,
+    CartModule,
+    ProductsModule,
+    AdminModule,
+    SharedModule,
+    AppRoutingModule,
+  ],
   providers: [
     {
       provide: ConstantService,

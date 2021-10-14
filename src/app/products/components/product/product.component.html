@@ -1,4 +1,11 @@
-<div class="product__title">{{ product.name }}</div>
+<div class="product__title">
+  <a
+    [routerLink]="['/product/', product.id]"
+    routerLinkActive="router-link-active"
+  >
+    {{ product.name }}</a
+  >
+</div>
 <div class="product__category">{{ product.category }}</div>
 <div class="product__description">{{ product.description }}</div>
 <div class="product__price">{{ product.price }}$</div>

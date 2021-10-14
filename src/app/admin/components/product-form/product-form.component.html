@@ -1,0 +1,50 @@
+<div class="admin-product-form">
+  <div class="admin-product-form__property">Name</div>
+  <div class="admin-product-form__value">
+    <input
+      type="text"
+      id="name"
+      (input)="onChange()"
+      [value]="product?.name"
+    />
+  </div>
+  <div class="admin-product-form__property">Description</div>
+  <div class="admin-product-form__value">
+    <input
+      type="text"
+      id="desc"
+      (input)="onChange()"
+      [value]="product?.description"
+    />
+  </div>
+  <div class="admin-product-form__property">Price</div>
+  <div class="admin-product-form__value">
+    <input
+      type="number"
+      id="price"
+      (input)="onChange()"
+      [value]="product?.price"
+    />
+  </div>
+  <div class="admin-product-form__property">Category</div>
+  <div class="admin-product-form__value">
+    <input type="radio" id="category" (input)="onChange()" value="Shoes" />
+    <input type="radio" id="category" (input)="onChange()" value="Clothes" />
+    <input
+      type="radio"
+      id="category"
+      (input)="onChange()"
+      value="Accessories"
+    />
+  </div>
+  <div class="admin-product-form__property">Available</div>
+  <div class="admin-product-form__value">
+    <input
+      type="checkbox"
+      id="available"
+      (change)="onChange()"
+      [checked]="product?.isAvailable"
+    />
+  </div>
+  <button (click)="onSave()">Save</button>
+</div>

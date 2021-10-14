@@ -1,0 +1,15 @@
+<div class="admin-product-list__items">
+  <div class="admin-product" *ngFor="let product of products$ | async">
+    <div class="admin-product__title">
+      <a
+        [routerLink]="['../product/edit/', product.id]"
+        routerLinkActive="router-link-active"
+      >
+        {{ product.name }}
+      </a>
+    </div>
+    <div class="admin-product__category">{{ product.category }}</div>
+    <div class="admin-product__description">{{ product.description }}</div>
+    <div class="admin-product__price">{{ product.price }}$</div>
+  </div>
+</div>

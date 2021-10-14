@@ -13,6 +13,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartItemComponent {
+  @Input() id: string;
   @Input() name: string;
   @Input() price: number;
   @Input() quantity: number;
@@ -24,14 +25,14 @@ export class CartItemComponent {
   constructor() {}
 
   onAddOneClick(): void {
-    this.addOne.next(this.name);
+    this.addOne.next(this.id);
   }
 
   onRemoveOneClick(): void {
-    this.removeOne.next(this.name);
+    this.removeOne.next(this.id);
   }
 
   onRemoveAllClick(): void {
-    this.removeAll.next(this.name);
+    this.removeAll.next(this.id);
   }
 }

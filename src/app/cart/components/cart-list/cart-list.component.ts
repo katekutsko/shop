@@ -29,7 +29,7 @@ export class CartListComponent implements OnInit {
   }
 
   trackByName(index: number, item: CartItemModel): string {
-    return item.name;
+    return item.id;
   }
 
   onClear(): void {
@@ -54,6 +54,5 @@ export class CartListComponent implements OnInit {
       ...this.sortOptions,
       sortField,
     };
-    console.log(sortField);
   }
 }

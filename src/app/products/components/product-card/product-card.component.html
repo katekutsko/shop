@@ -1,0 +1,12 @@
+<ng-container *ngIf="product$ | async as product">
+  <h3>{{ product.name }}</h3>
+  <div class="product__image"></div>
+  <p>{{ product.description }}</p>
+  <p>{{ product.price | currency: "USD":"symbol":"1.2-2" }}</p>
+  
+  <ng-container *ngIf="!product.isInCart; else addedToCart">
+    <button (click)="addToCart()">Buy</button>
+  </ng-container>
+  
+  <ng-template #addedToCart> Added to Cart!</ng-template>
+</ng-container>

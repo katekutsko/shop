@@ -51,16 +51,16 @@ export class CartService {
     this.updateCart();
   }
 
-  removeItemFromCart(itemName: string): void {
-    const itemIndex: number = this.findItemIndexByName(itemName);
+  removeItemFromCart(id: string): void {
+    const itemIndex: number = this.findItemIndexById(id);
 
     this.removeItem(itemIndex);
 
     this.updateCart();
   }
 
-  decreaseItemQuantity(itemName: string): void {
-    const itemIndex: number = this.findItemIndexByName(itemName);
+  decreaseItemQuantity(id: string): void {
+    const itemIndex: number = this.findItemIndexById(id);
     const item: CartItemModel = this.purchasedItems[itemIndex];
 
     if (item.quantity > 1) {
@@ -75,8 +75,8 @@ export class CartService {
     this.updateCart();
   }
 
-  increaseItemQuantity(itemName: string): void {
-    const itemIndex: number = this.findItemIndexByName(itemName);
+  increaseItemQuantity(id: string): void {
+    const itemIndex: number = this.findItemIndexById(id);
     const item: CartItemModel = this.purchasedItems[itemIndex];
 
     this.updateItemByIndex(itemIndex, {
@@ -97,9 +97,9 @@ export class CartService {
     return this.purchasedItems.length === 0;
   }
 
-  private findItemIndexByName(itemName: string): number {
+  private findItemIndexById(id: string): number {
     return this.purchasedItems.findIndex(
-      (itemInCart: CartItemModel) => itemInCart.name === itemName
+      (itemInCart: CartItemModel) => itemInCart.id === id
     );
   }
 

@@ -15,3 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Search by item name or description
 - Sort cart items by name, quantity or price (for this OrderBy pipe was used)
 - Formatting of cart items price was changed to decimal with symbol (Currency pipe was used)
+- Product card with details
+- 'Not found' page for non-existing pages
+- User roles: 'admin' and 'user'
+- Admin area (protected by guards): add, edit products
+- 'No access' page for protected pages
+- Conditional order processing (only when cart is not empty)
