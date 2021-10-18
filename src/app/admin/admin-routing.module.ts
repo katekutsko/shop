@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        canActivateChild: [IsAdminGuard],
+        canActivateChild: [IsAdminGuard], // достаточно гарда выше
         children: [
           { path: 'products-list', component: ProductsListComponent },
           {
