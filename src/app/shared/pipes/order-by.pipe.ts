@@ -8,27 +8,44 @@ export class OrderByPipe implements PipeTransform {
     items: object[],
     sortFields: string[],
     isAsc: boolean = false
-  ): unknown {
+  ): object[] {
     const itemsCopy: object[] = [...items];
     if (sortFields) {
-      sortFields.forEach((sortField: string) =>
-        itemsCopy.sort((a: object, b: object) => {
-          const type = typeof a[sortField];
-
-          if (type === 'number') {
-            return isAsc
-              ? a[sortField] - b[sortField]
-              : b[sortField] - a[sortField];
+      itemsCopy.sort((a: object, b: object) => {
+        for (const sortField of sortFields) {
+          const comparationResult: number = this.compareItemsByField(
+            a,
+            b,
+            sortField,
+            isAsc
+          );
+          if (comparationResult === 0) {
+            continue;
+          } else {
+            return comparationResult;
           }
-
-          if (type === 'string') {
-            return isAsc
-              ? (a[sortField] as string).localeCompare(b[sortField])
-              : (b[sortField] as string).localeCompare(a[sortField]);
-          }
-        })
-      );
+        }
+      });
     }
     return itemsCopy;
+  }
+
+  private compareItemsByField(
+    a: object,
+    b: object,
+    field: string,
+    isAsc: boolean
+  ): number {
+    const type = typeof a[field];
+
+    if (type === 'number') {
+      return isAsc ? a[field] - b[field] : b[field] - a[field];
+    }
+
+    if (type === 'string') {
+      return isAsc
+        ? (a[field] as string).localeCompare(b[field])
+        : (b[field] as string).localeCompare(a[field]);
+    }
   }
 }

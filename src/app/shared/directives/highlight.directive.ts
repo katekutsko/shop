@@ -4,6 +4,10 @@ import { Directive, HostBinding, HostListener } from '@angular/core';
   selector: '[appHighlight]',
 })
 export class HighlightDirective {
+  private isHighlighted = false;
+
+  constructor() {}
+
   @HostBinding('class.highlighted') get highlighted(): boolean {
     return this.isHighlighted;
   }
@@ -13,8 +17,4 @@ export class HighlightDirective {
   @HostListener('mouseleave') onMouseLeave(): void {
     this.isHighlighted = false;
   }
-
-  private isHighlighted = false;
-
-  constructor() {}
 }
