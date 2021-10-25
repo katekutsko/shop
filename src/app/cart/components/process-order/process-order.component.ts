@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../services/cart.service';
+import { first } from 'rxjs/operators';
+import { CartObservableService } from '../../services';
 
 @Component({
   selector: 'app-process-order',
@@ -7,9 +8,13 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./process-order.component.scss'],
 })
 export class ProcessOrderComponent implements OnInit {
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartObservableService) {}
 
   ngOnInit(): void {
-    this.cartService.clear();
+    this.processOrder();
+  }
+
+  processOrder(): void {
+    this.cartService.clear().pipe(first()).subscribe();
   }
 }

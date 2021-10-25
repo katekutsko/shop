@@ -1,5 +1,5 @@
+export * from './app-settings.service';
 export * from './local-storage.service';
-export * from './data.service';
 export * from './user-role.service';
 export * from './generator.service';
 export * from './generator.factory';

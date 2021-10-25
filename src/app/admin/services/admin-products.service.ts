@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DataService } from 'src/app/core/services/data.service';
 import { ProductModel } from 'src/app/products/models/product.model';
+import { ProductsPromiseService } from 'src/app/products/services/products-promise.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminProductsService {
-  constructor(private readonly dataService: DataService) {}
+  constructor(private readonly dataService: ProductsPromiseService) {}
 
   getProducts(): Observable<ProductModel[]> {
-    return this.dataService.getProducts();
+    return from(this.dataService.getProducts());
   }
 
   getProductById(id: string): Observable<ProductModel> {

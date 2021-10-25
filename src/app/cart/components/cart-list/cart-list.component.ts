@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
+import { AppSettingsService } from 'src/app/core';
+import { AppSettingsModel } from 'src/app/core/models';
 import { SortOptions } from 'src/app/shared';
 import { CartItemModel } from '../../models/cart-item.model';
-import { CartService } from '../../services/cart.service';
+import { CartObservableService } from '../../services/cart-observable.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -20,12 +22,25 @@ export class CartListComponent implements OnInit {
     isAsc: false,
   };
 
-  constructor(private readonly cartService: CartService) {}
+  constructor(
+    private readonly cartService: CartObservableService,
+    private readonly appSettings: AppSettingsService
+  ) {}
 
   ngOnInit(): void {
-    this.products$ = this.cartService.getPurchasedItems();
+    this.products$ = this.cartService.getCartItems();
     this.totalItemsAmount$ = this.cartService.getTotalItemsAmount();
     this.totalCost$ = this.cartService.getTotalCost();
+
+    this.appSettings
+      .getSettings()
+      .pipe(first())
+      .subscribe(({ isAsc }: AppSettingsModel) => {
+        this.sortOptions = {
+          ...this.sortOptions,
+          isAsc,
+        };
+      });
   }
 
   trackByName(index: number, item: CartItemModel): string {
@@ -33,19 +48,19 @@ export class CartListComponent implements OnInit {
   }
 
   onClear(): void {
-    this.cartService.clear();
+    this.products$ = this.cartService.clear();
   }
 
   onAddOne($event: string): void {
-    this.cartService.increaseItemQuantity($event);
+    this.products$ = this.cartService.increaseItemQuantity($event);
   }
 
   onRemoveOne($event: string): void {
-    this.cartService.decreaseItemQuantity($event);
+    this.products$ = this.cartService.decreaseItemQuantity($event);
   }
 
   onRemoveAll($event: string): void {
-    this.cartService.removeItemFromCart($event);
+    this.products$ = this.cartService.deleteCartItem($event);
   }
 
   onSortFieldToggled(event: any): void {

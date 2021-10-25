@@ -1,42 +1,43 @@
 <div class="cart__title">Cart</div>
-<div *ngIf="(products$ | async).length > 0; else emptyCart">
-  <label for="sort"> Sort By: </label>
-  <select id="sort" name="sort" (change)="onSortFieldToggled($event)">
-    <option value="" disabled selected>Select option</option>
-    <option value="price">Price</option>
-    <option value="name">Name</option>
-    <option value="quantity">Quantity</option>
-  </select>
-  <div>
-    Ascending
-    <input type="checkbox" [(ngModel)]="sortOptions.isAsc" />
+<ng-container *ngIf="products$ | async as products">
+  <div *ngIf="products.length > 0; else emptyCart">
+    <label for="sort"> Sort By: </label>
+    <select id="sort" name="sort" (change)="onSortFieldToggled($event)">
+      <option value="" disabled selected>Select option</option>
+      <option value="price">Price</option>
+      <option value="name">Name</option>
+      <option value="quantity">Quantity</option>
+    </select>
+    <div>
+      Ascending
+      <input type="checkbox" [(ngModel)]="sortOptions.isAsc" />
+    </div>
+    <div
+      *ngFor="
+        let product of products
+          | orderBy: [sortOptions.sortField]:sortOptions.isAsc;
+        trackBy: trackByName
+      "
+    >
+      <app-cart-item
+        [id]="product.id"
+        [name]="product.name"
+        [price]="product.price"
+        [quantity]="product.quantity"
+        (addOne)="onAddOne($event)"
+        (removeOne)="onRemoveOne($event)"
+        (removeAll)="onRemoveAll($event)"
+        appHighlight
+      ></app-cart-item>
+    </div>
+    <hr />
+    <div class="cart__total-items">
+      Total items: {{ totalItemsAmount$ | async }}
+    </div>
+    <div class="cart__total-cost">Total cost: {{ totalCost$ | async }}</div>
+    <button (click)="onClear()">Clear</button>
   </div>
-  <div
-    *ngFor="
-      let product of products$
-        | async
-        | orderBy: [sortOptions.sortField]:sortOptions.isAsc;
-      trackBy: trackByName
-    "
-  >
-    <app-cart-item
-      [id]="product.id"
-      [name]="product.name"
-      [price]="product.price"
-      [quantity]="product.quantity"
-      (addOne)="onAddOne($event)"
-      (removeOne)="onRemoveOne($event)"
-      (removeAll)="onRemoveAll($event)"
-      appHighlight
-    ></app-cart-item>
-  </div>
-  <hr />
-  <div class="cart__total-items">
-    Total items: {{ totalItemsAmount$ | async }}
-  </div>
-  <div class="cart__total-cost">Total cost: {{ totalCost$ | async }}</div>
-  <button (click)="onClear()">Clear</button>
-</div>
+</ng-container>
 <ng-template #emptyCart>
   <div class="cart__no-items">There are no items in cart</div>
 </ng-template>

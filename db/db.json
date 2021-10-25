@@ -1,0 +1,61 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Trench coat",
+      "description": "Nullam ut enim et tellus tempus hendrerit.",
+      "price": 260,
+      "category": "clothes",
+      "isAvailable": true
+    },
+    {
+      "id": "2",
+      "name": "Fur coat",
+      "description": "Nullam ut enim et tellus tempus hendrerit.",
+      "price": 200,
+      "category": "clothes",
+      "isAvailable": true
+    },
+    {
+      "id": "3",
+      "name": "Leather coat",
+      "description": "Nullam ut enim et tellus tempus hendrerit.",
+      "price": 300,
+      "category": "clothes",
+      "isAvailable": true
+    },
+    {
+      "id": "4",
+      "name": "Knitted scarf",
+      "description": "Nulla mattis orci, augue quam maximus nibh, vitae sagittis odio ante at neque.",
+      "price": 70,
+      "category": "accessories",
+      "isAvailable": false
+    },
+    {
+      "id": "5",
+      "name": "Leather boots",
+      "description": "Duis pharetra imperdiet eros quis aliquam.",
+      "price": 70,
+      "category": "shoes",
+      "isAvailable": true
+    },
+    {
+      "id": "6",
+      "name": "Silk scarf",
+      "description": "Nulla mattis orci, augue quam maximus nibh, vitae sagittis odio ante at neque.",
+      "price": 70,
+      "category": "accessories",
+      "isAvailable": true
+    },
+    {
+      "id": "7",
+      "name": "Leather shoes",
+      "description": "Duis pharetra imperdiet eros quis aliquam.",
+      "price": 340,
+      "category": "shoes",
+      "isAvailable": true
+    }
+  ],
+  "cart": []
+}

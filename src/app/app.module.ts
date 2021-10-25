@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { CartModule } from './cart/cart.module';
@@ -21,11 +22,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AdminModule } from './admin/admin.module';
 import { NoAccessPageComponent } from './core/components/no-access-page/no-access-page.component';
 import { NotFoundPageComponent } from './core/components/not-found-page/not-found-page.component';
+import { httpInterceptorProviders } from './core/interceptors';
 
 @NgModule({
-  declarations: [AppComponent, FirstComponent, NoAccessPageComponent, NotFoundPageComponent],
+  declarations: [
+    AppComponent,
+    FirstComponent,
+    NoAccessPageComponent,
+    NotFoundPageComponent,
+  ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     CartModule,
     ProductsModule,
     AdminModule,
@@ -50,6 +58,7 @@ import { NotFoundPageComponent } from './core/components/not-found-page/not-foun
       provide: LocalStorage,
       useValue: new LocalStorageService(),
     },
+    httpInterceptorProviders,
   ],
   bootstrap: [AppComponent],
 })

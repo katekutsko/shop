@@ -37,6 +37,6 @@ export class ProductListComponent implements OnInit {
   }
 
   onAddToCart($event: ProductModel): void {
-    this.productsService.addItemToCart($event);
+    this.products$ = this.productsService.addItemToCart($event);
   }
 }

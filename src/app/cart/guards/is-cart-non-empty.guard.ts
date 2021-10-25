@@ -5,15 +5,14 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CartService } from '../services';
+import { map, Observable } from 'rxjs';
+import { CartObservableService } from '../services/cart-observable.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IsCartNonEmptyGuard implements CanActivate {
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartObservableService) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -23,10 +22,8 @@ export class IsCartNonEmptyGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    return this.cartService.getTotalItemsAmount().pipe(
-      map((amount: number) => {
-        return amount > 0;
-      })
-    );
+    return this.cartService
+      .isEmptyCart()
+      .pipe(map((isEmptyCart: boolean) => !isEmptyCart));
   }
 }
