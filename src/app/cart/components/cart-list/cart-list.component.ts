@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { first, Observable } from 'rxjs';
-import { AppSettingsService } from 'src/app/core';
-import { AppSettingsModel } from 'src/app/core/models';
-import { SortOptions } from 'src/app/shared';
-import { CartItemModel } from '../../models/cart-item.model';
-import { CartObservableService } from '../../services/cart-observable.service';
+import {
+  AppSettingsService,
+  CartFacadeService,
+  AppSettingsModel,
+} from '../../../core';
+import { SortOptions } from '../../../shared';
+import { CartItemModel } from '../../models';
 
 @Component({
   selector: 'app-cart-list',
@@ -23,14 +25,14 @@ export class CartListComponent implements OnInit {
   };
 
   constructor(
-    private readonly cartService: CartObservableService,
-    private readonly appSettings: AppSettingsService
+    private readonly appSettings: AppSettingsService,
+    private readonly cartFacade: CartFacadeService
   ) {}
 
   ngOnInit(): void {
-    this.products$ = this.cartService.getCartItems();
-    this.totalItemsAmount$ = this.cartService.getTotalItemsAmount();
-    this.totalCost$ = this.cartService.getTotalCost();
+    this.products$ = this.cartFacade.items$;
+    this.totalItemsAmount$ = this.cartFacade.totalAmount$;
+    this.totalCost$ = this.cartFacade.totalCost$;
 
     this.appSettings
       .getSettings()
@@ -48,19 +50,19 @@ export class CartListComponent implements OnInit {
   }
 
   onClear(): void {
-    this.products$ = this.cartService.clear();
+    this.cartFacade.clear();
   }
 
-  onAddOne($event: string): void {
-    this.products$ = this.cartService.increaseItemQuantity($event);
+  onAddOne($event: CartItemModel): void {
+    this.cartFacade.increaseItemQuantity($event);
   }
 
-  onRemoveOne($event: string): void {
-    this.products$ = this.cartService.decreaseItemQuantity($event);
+  onRemoveOne($event: CartItemModel): void {
+    this.cartFacade.decreaseItemQuantity($event);
   }
 
-  onRemoveAll($event: string): void {
-    this.products$ = this.cartService.deleteCartItem($event);
+  onRemoveAll($event: CartItemModel): void {
+    this.cartFacade.deleteCartItem($event.id);
   }
 
   onSortFieldToggled(event: any): void {

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ParamMap, ActivatedRoute, Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { first, switchMap, tap } from 'rxjs/operators';
+import { first, tap } from 'rxjs/operators';
+import { AppState, selectProductByUrl, RouterActions } from '../../../core';
 import { ProductModel } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
 
@@ -15,18 +16,15 @@ export class ProductCardComponent implements OnInit {
 
   constructor(
     private readonly productsService: ProductsService,
-    private router: Router,
-    private route: ActivatedRoute
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
-    this.product$ = this.route.paramMap.pipe(
-      switchMap((paramMap: ParamMap) => {
-        return this.productsService.getProductById(paramMap.get('productID'));
-      }),
+    this.product$ = this.store.pipe(
+      select(selectProductByUrl),
       tap((product: ProductModel) => {
         if (!product) {
-          this.router.navigate(['/page-not-found']);
+          this.store.dispatch(RouterActions.go({ path: ['/page-not-found'] }));
         }
       })
     );

@@ -5,12 +5,11 @@ import {
   RouterStateSnapshot,
   UrlTree,
   CanActivateChild,
-  Router,
 } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { UserRole } from 'src/app/core';
-import { UserRoleService } from 'src/app/core/services/user-role.service';
+import { UserRole, AppState, UserRoleService, RouterActions } from '../../core';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,7 @@ import { UserRoleService } from 'src/app/core/services/user-role.service';
 export class IsAdminGuard implements CanActivate, CanActivateChild {
   constructor(
     private readonly userRoleService: UserRoleService,
-    private router: Router
+    private store: Store<AppState>
   ) {}
 
   canActivateChild(
@@ -48,7 +47,7 @@ export class IsAdminGuard implements CanActivate, CanActivateChild {
       map((role: UserRole) => role === UserRole.ADMIN),
       tap((isAdmin: boolean) => {
         if (!isAdmin) {
-          this.router.navigate(['/no-access']);
+          this.store.dispatch(RouterActions.go({ path: ['/no-access'] }));
         }
       })
     );

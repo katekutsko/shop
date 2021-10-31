@@ -18,6 +18,8 @@ export class ProductListComponent implements OnInit {
   constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit(): void {
+    this.productsService.loadProducts();
+
     this.products$ = combineLatest([
       this.searchString$,
       this.productsService.getProducts(),
@@ -37,6 +39,6 @@ export class ProductListComponent implements OnInit {
   }
 
   onAddToCart($event: ProductModel): void {
-    this.products$ = this.productsService.addItemToCart($event);
+    this.productsService.addItemToCart($event);
   }
 }

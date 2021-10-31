@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState, RouterActions } from '../core';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.scss']
+  styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-
-  constructor(private router: Router) { }
+  constructor(private store: Store<AppState>) {}
 
   onProcessOrder(): void {
-    this.router.navigate(['/order']);
+    this.store.dispatch(RouterActions.go({ path: ['/order'] }));
   }
 }

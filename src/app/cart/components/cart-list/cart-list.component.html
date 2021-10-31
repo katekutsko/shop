@@ -20,10 +20,7 @@
       "
     >
       <app-cart-item
-        [id]="product.id"
-        [name]="product.name"
-        [price]="product.price"
-        [quantity]="product.quantity"
+        [item]="product"
         (addOne)="onAddOne($event)"
         (removeOne)="onRemoveOne($event)"
         (removeAll)="onRemoveAll($event)"

@@ -5,6 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
+import { CartItemModel } from '../../models';
 
 @Component({
   selector: 'app-cart-item',
@@ -13,26 +14,23 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartItemComponent {
-  @Input() id: string;
-  @Input() name: string;
-  @Input() price: number;
-  @Input() quantity: number;
+  @Input() item: CartItemModel;
 
-  @Output() addOne: EventEmitter<string> = new EventEmitter();
-  @Output() removeOne: EventEmitter<string> = new EventEmitter();
-  @Output() removeAll: EventEmitter<string> = new EventEmitter();
+  @Output() addOne: EventEmitter<CartItemModel> = new EventEmitter();
+  @Output() removeOne: EventEmitter<CartItemModel> = new EventEmitter();
+  @Output() removeAll: EventEmitter<CartItemModel> = new EventEmitter();
 
   constructor() {}
 
   onAddOneClick(): void {
-    this.addOne.next(this.id);
+    this.addOne.next(this.item);
   }
 
   onRemoveOneClick(): void {
-    this.removeOne.next(this.id);
+    this.removeOne.next(this.item);
   }
 
   onRemoveAllClick(): void {
-    this.removeAll.next(this.id);
+    this.removeAll.next(this.item);
   }
 }

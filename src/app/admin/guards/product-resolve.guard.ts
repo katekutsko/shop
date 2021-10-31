@@ -3,50 +3,34 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot,
   Resolve,
-  Router,
 } from '@angular/router';
-import { EMPTY, Observable, of } from 'rxjs';
-import { catchError, switchMap, take } from 'rxjs/operators';
-import { ProductModel } from 'src/app/products/models/product.model';
-import { AdminProductsService } from '../services/admin-products.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
+import { AppState, ProductsFacadeService, RouterActions } from '../../core';
+import { ProductModel } from '../../products/models/product.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductResolveGuard implements Resolve<ProductModel> {
   constructor(
-    private readonly productsService: AdminProductsService,
-    private readonly router: Router
+    private productsFacade: ProductsFacadeService,
+    private store: Store<AppState>
   ) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): ProductModel | Observable<ProductModel> | Promise<ProductModel> {
-    if (!route.paramMap.has('productID')) {
-      return of({
-        name: '',
-        description: '',
-        price: null,
-        category: null,
-        isAvailable: null,
-      });
-    }
-    const id: string = route.paramMap.get('productID');
-
-    return this.productsService.getProductById(id).pipe(
-      switchMap((product: ProductModel) => {
-        if (product) {
-          return of(product);
-        } else {
-          this.router.navigate(['/admin/products-list']);
-          return EMPTY;
-        }
-      }),
+    return this.productsFacade.productByUrl$.pipe(
       take(1),
-      catchError(() => {
-        this.router.navigate(['/admin/products-list']);
-        return EMPTY;
+      tap((product: ProductModel) => {
+        if (!product) {
+          this.store.dispatch(
+            RouterActions.go({ path: ['/admin/products-list'] })
+          );
+        }
       })
     );
   }
