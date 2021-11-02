@@ -1,1 +1,75 @@
-<p>Your order was successfully processed!</p>
+<form [formGroup]="orderForm" (ngSubmit)="processOrder()">
+  <label for="firstName">First Name</label>
+  <input
+    id="firstName"
+    type="text"
+    formControlName="firstName"
+    [class.has-error]="firstName.invalid && (firstName.touched || firstName.dirty)"
+    (blur)="onBlur($event)"
+  />
+  <span
+    *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)"
+    class="error-message"
+  >
+    {{ validationErrorMessages.firstName.message }}
+  </span>
+  <br />
+  <label for="lastName">Last Name</label>
+  <input id="lastName" type="text" formControlName="lastName" />
+  <br />
+  <label for="email">E-mail</label>
+  <input
+    appEmailValidator
+    id="email"
+    type="email"
+    formControlName="email"
+    [class.has-error]="email.invalid && (email.touched || email.dirty)"
+    (blur)="onBlur($event)"
+  />
+  <span
+    *ngIf="email.invalid && (email.touched || email.dirty)"
+    class="error-message"
+  >
+    {{ validationErrorMessages.email.message }}
+  </span>
+  <br />
+  <label for="pickup">Pickup</label>
+  <input
+    id="pickup"
+    type="checkbox"
+    formControlName="pickup"
+    (change)="onPickupToggled($event.target.checked)"
+  />
+  <br />
+  <ng-container *ngIf="!pickup.value">
+    <label for="address">Address</label>
+    <input
+      id="address"
+      type="text"
+      formControlName="address"
+      [class.has-error]="address.invalid && (address.touched || address.dirty)"
+      (blur)="onBlur($event)"
+    />
+    <span
+      *ngIf="address.invalid && (address.touched || address.dirty)"
+      class="error-message"
+    >
+      {{ validationErrorMessages.address.message }}
+    </span>
+    <br />
+  </ng-container>
+  <div formArrayName="phoneNumbers">
+    <ng-container
+      *ngFor="let phoneNumber of phoneNumbers.controls; let i = index"
+    >
+      <label for="{{ 'phone-' + i }}">Phone number {{ i + 1 }}</label>
+      <input id="{{ 'phone-' + i }}" [formControlName]="i" type="tel" />
+      <button (click)="onRemovePhoneNumber(i)">X</button>
+      <br />
+    </ng-container>
+  </div>
+  <button type="button" (click)="onAddPhoneNumber()">
+    Add Another Phone Number
+  </button>
+  <button type="submit" [disabled]="orderForm.invalid">Submit Order</button>
+</form>
