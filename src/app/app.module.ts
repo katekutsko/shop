@@ -40,6 +40,8 @@ import { RootStoreModule } from './core/@ngrx/root-store.module';
     ProductsModule,
     AdminModule,
     SharedModule,
+    // Все модули у вас подключаются в RootStoreModule,
+    // а этот модуль почему-то находится тут
     EffectsModule.forRoot(),
     RootStoreModule,
     AppRoutingModule,
