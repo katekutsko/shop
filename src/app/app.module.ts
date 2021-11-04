@@ -23,7 +23,6 @@ import { AdminModule } from './admin/admin.module';
 import { NoAccessPageComponent } from './core/components/no-access-page/no-access-page.component';
 import { NotFoundPageComponent } from './core/components/not-found-page/not-found-page.component';
 import { httpInterceptorProviders } from './core/interceptors';
-import { EffectsModule } from '@ngrx/effects';
 import { RootStoreModule } from './core/@ngrx/root-store.module';
 
 @NgModule({
@@ -40,7 +39,6 @@ import { RootStoreModule } from './core/@ngrx/root-store.module';
     ProductsModule,
     AdminModule,
     SharedModule,
-    EffectsModule.forRoot(),
     RootStoreModule,
     AppRoutingModule,
   ],

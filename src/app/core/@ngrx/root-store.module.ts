@@ -6,7 +6,7 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { EffectsModule } from '@ngrx/effects';
 
 import { ProductsStoreModule } from './products/products-store.module';
-import { CustomSerializer, routerReducers, RouterEffects } from './router';
+import { CustomSerializer, RouterEffects, routerReducers } from './router';
 import { EntityStoreModule } from './data/entity-store.module';
 
 @NgModule({
@@ -23,7 +23,7 @@ import { EntityStoreModule } from './data/entity-store.module';
         strictActionTypeUniqueness: true,
       },
     }),
-    EffectsModule.forFeature([RouterEffects]),
+    EffectsModule.forRoot([RouterEffects]),
     ProductsStoreModule,
     EntityStoreModule,
     StoreRouterConnectingModule.forRoot({
