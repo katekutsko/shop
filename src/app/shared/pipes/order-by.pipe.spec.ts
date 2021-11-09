@@ -1,6 +1,6 @@
 import { OrderByPipe } from './order-by.pipe';
 
-fdescribe(OrderByPipe.name, () => {
+describe(OrderByPipe.name, () => {
   describe(OrderByPipe.prototype.transform.name, () => {
     it('should sort items according to parameters', () => {
       const a: any[] = [
